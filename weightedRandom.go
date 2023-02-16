@@ -14,14 +14,24 @@ func WeightedRandom[P interface{ GetWeight() int64 }](elements []P) (P, error) {
 		total.Add(total, big.NewInt(element.GetWeight()))
 	}
 
-	var shuffler []P
+	var rng, _ = rand.Int(rand.Reader, total)
+	var randomNumber = rng.Int64()
+	var countWeight int64 = 0
+	var target P
 
 	for _, element := range elements {
-		for j := int64(0); j < element.GetWeight(); j++ {
-			shuffler = append(shuffler, element)
+		var weight = element.GetWeight()
+
+		if weight < 0 {
+			continue
+		}
+
+		countWeight += weight
+		if randomNumber < countWeight {
+			target = element
+			break
 		}
 	}
 
-	var rnd, _ = rand.Int(rand.Reader, total)
-	return shuffler[rnd.Int64()], nil
+	return target, nil
 }
