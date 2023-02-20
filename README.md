@@ -3,3 +3,6 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/alparslanahmed/weightedrandom/badge)](https://www.codefactor.io/repository/github/alparslanahmed/weightedrandom)
 # weightedrandom
 Golang weighted random selection from an elements with cryptographically secure pseudorandom number generator (CSPRNG)
+
+
+TODO: TEST
